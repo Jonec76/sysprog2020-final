@@ -24,8 +24,6 @@ TreeAncestor *treeAncestorCreate(int n, int *parent, int parentSize)
             max_depth = obj->depth[i];
         int node_level = 32 - __builtin_clz(obj->depth[i]);
         obj->parent[i] = malloc(node_level * sizeof(int));
-        for (int j = 0; j < node_level; j++)
-            obj->parent[i][j] = -1;
     }
     for (int i = 0; i < parentSize; i++)
         obj->parent[i][0] = parent[i];
@@ -37,10 +35,7 @@ TreeAncestor *treeAncestorCreate(int n, int *parent, int parentSize)
         for(int j=start_idx;j<parentSize;j++){
             if(32 - __builtin_clz(obj->depth[j]) <= bit_idx)
                 continue;
-            if(obj->parent[j][bit_idx - 1]==-1)
-                obj->parent[j][bit_idx] = -1;
-            else
-                obj->parent[j][bit_idx] = obj->parent[obj->parent[j][bit_idx - 1]][bit_idx - 1];
+            obj->parent[j][bit_idx] = obj->parent[obj->parent[j][bit_idx - 1]][bit_idx - 1];
         }
         bit_idx++;
     }
