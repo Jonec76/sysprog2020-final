@@ -1,5 +1,5 @@
-main:1483.c
-	gcc -o main 1483.c -Wall -Wextra -Woverflow -fsanitize=address
+main:51.cpp
+	g++ -o main 51.cpp -Wall -Wextra -Woverflow -fsanitize=address
 .PHONY: clean
 clear:
 	rm main
